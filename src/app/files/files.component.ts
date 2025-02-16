@@ -11,4 +11,11 @@ import { NgFor } from '@angular/common';
 export class FilesComponent {
   @Input() files: string[] = [];
   constructor(private fileUploadService: FileUploadService) {}
+
+  delete(file: string): void {
+    this.files = this.files.filter((h) => h !== file);
+    this.fileUploadService
+      .deleteFile(file)
+      .subscribe((response) => { console.log(response)});
+  }
 }
