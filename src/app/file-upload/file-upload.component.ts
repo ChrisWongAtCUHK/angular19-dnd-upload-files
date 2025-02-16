@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
 
@@ -12,6 +13,8 @@ const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
 export class FileUploadComponent {
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
 
+  #hotToastService = inject(HotToastService);
+
   allowedFileTypes = ALLOWED_FILE_TYPES;
 
   isUploading = false;
@@ -20,6 +23,13 @@ export class FileUploadComponent {
 
   handleChange(event: any) {
     const file = event.target.files[0] as File;
+
+    if (this.allowedFileTypes.indexOf(file?.type) === -1) {
+      this.#hotToastService.error('File type is not allowed.');
+      this.handleRemovesFile();
+      return;
+    }
+
     this.fileUrl = URL.createObjectURL(file);
     this.uploadFile = file;
   }
