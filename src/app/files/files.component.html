@@ -1,8 +1,8 @@
-<ul class="files">
-  <li *ngFor="let file of files">
+<mat-nav-list>
+  <mat-list-item *ngFor="let file of files">
     <a href="{{file.url}}">
       {{file.name}}
     </a>
     <button type="button" class="delete" title="delete customer" (click)="delete(file.url)">x</button>
-  </li>
-</ul>
+  </mat-list-item>
+</mat-nav-list>
