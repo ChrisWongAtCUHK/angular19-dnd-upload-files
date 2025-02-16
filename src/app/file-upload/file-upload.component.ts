@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { HotToastService } from '@ngxpert/hot-toast';
+import { serialize } from 'object-to-formdata';
 
 const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
 
@@ -44,6 +45,11 @@ export class FileUploadComponent {
   }
 
   handleUploadFile() {
+    this.isUploading = true;
+
+    const formData = serialize({
+      document: this.uploadFile
+    });
     // logic to upload file
   }
 }
