@@ -18,11 +18,13 @@ input {
   width: 200px;
 }
 
-
+.mat-mdc-list-base {
+  width: 290px;
+}
 
 button.delete {
   position: absolute;
-  left: 160px;
+  left: 240px;
   background-color: white;
   color:  #525252;
   font-size: 0.6rem;
