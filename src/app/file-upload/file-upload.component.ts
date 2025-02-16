@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { serialize } from 'object-to-formdata';
 import { FileUploadService } from '../file-upload.service';
@@ -14,6 +14,7 @@ const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
   styleUrl: './file-upload.component.css',
 })
 export class FileUploadComponent {
+  files: string[] = [];
   constructor(private fileUploadService: FileUploadService) {}
 
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
@@ -25,6 +26,10 @@ export class FileUploadComponent {
   isUploading = false;
   fileUrl!: string | null;
   uploadFile!: File | null;
+
+  ngOnInit(): void {
+    this.getFiles();
+  }
 
   handleChange(event: any) {
     const file = event.target.files[0] as File;
@@ -60,6 +65,15 @@ export class FileUploadComponent {
       .subscribe(r => {
         console.log(r)
         this.isUploading = false;
+        this.getFiles();
+      });
+  }
+
+  getFiles(): void {
+    this.fileUploadService
+      .getFiles()
+      .subscribe((files) => {
+        this.files = files;
       });
   }
 }

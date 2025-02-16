@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FileUploadService } from '../file-upload.service';
 import { NgFor } from '@angular/common';
 
@@ -9,18 +9,6 @@ import { NgFor } from '@angular/common';
   styleUrl: './files.component.css',
 })
 export class FilesComponent {
-  files: string[] = [];
+  @Input() files: string[] = [];
   constructor(private fileUploadService: FileUploadService) {}
-
-  ngOnInit(): void {
-    this.getFiles();
-  }
-
-  getFiles(): void {
-    this.fileUploadService
-      .getFiles()
-      .subscribe((files) => {
-        this.files = files;
-      });
-  }
 }
