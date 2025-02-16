@@ -1,7 +1,8 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { Component, ElementRef, inject, Input, ViewChild } from '@angular/core';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { serialize } from 'object-to-formdata';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FileUploadService } from '../file-upload.service';
 import { FilesComponent } from '../files/files.component';
 import { DBFile } from '../dbfile';
@@ -10,7 +11,7 @@ const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
 
 @Component({
   selector: 'app-file-upload',
-  imports: [CommonModule, FilesComponent],
+  imports: [CommonModule, NgIf, MatProgressSpinnerModule, FilesComponent],
   templateUrl: './file-upload.component.html',
   styleUrl: './file-upload.component.css',
 })
@@ -24,11 +25,12 @@ export class FileUploadComponent {
 
   allowedFileTypes = ALLOWED_FILE_TYPES;
 
-  isUploading = false;
+  isLoading = true;
   fileUrl!: string | null;
   uploadFile!: File | null;
 
   ngOnInit(): void {
+
     this.getFiles();
   }
 
@@ -55,26 +57,23 @@ export class FileUploadComponent {
   }
 
   handleUploadFile() {
-    this.isUploading = true;
+    this.isLoading = true;
 
     const formData = serialize({
-      image: this.uploadFile
+      image: this.uploadFile,
     });
     // logic to upload file
-    this.fileUploadService
-      .uploadFile(formData)
-      .subscribe(r => {
-        console.log(r)
-        this.isUploading = false;
-        this.getFiles();
-      });
+    this.fileUploadService.uploadFile(formData).subscribe((r) => {
+      console.log(r);
+      this.isLoading = false;
+      this.getFiles();
+    });
   }
 
   getFiles(): void {
-    this.fileUploadService
-      .getFiles()
-      .subscribe((files) => {
-        this.files = files;
-      });
+    this.fileUploadService.getFiles().subscribe((files) => {
+      this.files = files;
+      this.isLoading = false;
+    });
   }
 }

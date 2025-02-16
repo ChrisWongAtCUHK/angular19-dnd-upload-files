@@ -3,7 +3,7 @@
 
   <div class="flex items-center content-center min-h-[350px] gap-x-6">
     <!-- Start Drop Zone -->
-    <div
+    <div *ngIf="!isLoading"
       class="relative flex flex-col outline-gray-500 outline-2 -outline-offset-4 outline-dashed w-[350px] h-[350px] rounded-2xl items-center justify-center">
       <input #fileInput type="file" (change)="handleChange($event)" [accept]="allowedFileTypes"
         class="absolute w-full h-full cursor-pointer opacity-0 top-0 left-0" />
@@ -28,6 +28,7 @@
       </button>
       <app-files [files]="files"></app-files>
     </div>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
     <div>&nbsp;</div>
     <!-- Start Preview Image -->
     <div *ngIf="fileUrl && uploadFile" [ngStyle]="{ 'background-image': 'url(' + fileUrl + ')' }"
@@ -36,11 +37,11 @@
         <p class="mb-6">{{ uploadFile.name }}</p>
 
         <div class="flex gap-3 justify-start">
-          <button type="button" [disabled]="isUploading" (click)="handleUploadFile()"
+          <button type="button" [disabled]="isLoading" (click)="handleUploadFile()"
             class="text-sm font-medium w-[50%] border border-blue-500 px-4 py-3 bg-blue-500 text-blue-50 rounded-lg hover:bg-blue-600 ease-in-out disabled:bg-gray-300 disabled:border-gray-300">
-            {{ !isUploading ? 'UPLOAD' : 'UPLOADING...'}}
+            {{ !isLoading ? 'UPLOAD' : 'UPLOADING...'}}
           </button>
-          <button type="button" [disabled]="isUploading" (click)="handleRemovesFile()"
+          <button type="button" [disabled]="isLoading" (click)="handleRemovesFile()"
             class="text-sm font-medium w-[50%] border border-red-500 px-4 py-3 rounded-lg text-red-500 hover:bg-red-500 hover:text-white ease-in-out">
             REMOVE
           </button>
