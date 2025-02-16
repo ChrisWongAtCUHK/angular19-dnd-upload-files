@@ -14,4 +14,8 @@ export class FileUploadService {
   uploadFile(formData: FormData): Observable<Object>{
     return this.http.post(this.filesUrl, formData)
   }
+
+  getFiles(): Observable<string[]>{
+    return this.http.get<string[]>(this.filesUrl);
+  }
 }

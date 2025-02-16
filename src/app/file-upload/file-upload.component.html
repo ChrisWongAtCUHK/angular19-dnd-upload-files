@@ -26,14 +26,14 @@
         class="z-10 mt-6 text-green-50 px-6 py-3 bg-green-500 rounded-lg font-medium text-base hover:bg-green-600 ease-in-out">
         Browse File
       </button>
+      <app-files></app-files>
     </div>
-    <!-- End Drop Zone -->
 
     <!-- Start Preview Image -->
     <div *ngIf="fileUrl && uploadFile" [ngStyle]="{ 'background-image': 'url(' + fileUrl + ')' }"
       class="flex flex-col justify-end border w-[350px] h-[350px] rounded-2xl items-center relative bg-cover bg-center overflow-hidden bg-gray-300">
       <div class="flex flex-col w-full p-4 bg-white">
-        <p class="mb-6">{{ uploadFile?.name }}</p>
+        <p class="mb-6">{{ uploadFile.name }}</p>
 
         <div class="flex gap-3 justify-start">
           <button type="button" [disabled]="isUploading" (click)="handleUploadFile()"

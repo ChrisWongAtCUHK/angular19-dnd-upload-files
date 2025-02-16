@@ -3,12 +3,13 @@ import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { serialize } from 'object-to-formdata';
 import { FileUploadService } from '../file-upload.service';
+import { FilesComponent } from '../files/files.component';
 
 const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
 
 @Component({
   selector: 'app-file-upload',
-  imports: [CommonModule],
+  imports: [CommonModule, FilesComponent],
   templateUrl: './file-upload.component.html',
   styleUrl: './file-upload.component.css',
 })
