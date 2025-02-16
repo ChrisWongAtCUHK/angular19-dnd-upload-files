@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { HotToastService } from '@ngxpert/hot-toast';
 import { serialize } from 'object-to-formdata';
+import { FileUploadService } from '../file-upload.service';
 
 const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
 
@@ -12,6 +13,8 @@ const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
   styleUrl: './file-upload.component.css',
 })
 export class FileUploadComponent {
+  constructor(private fileUploadService: FileUploadService) {}
+
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
 
   #hotToastService = inject(HotToastService);
@@ -48,8 +51,14 @@ export class FileUploadComponent {
     this.isUploading = true;
 
     const formData = serialize({
-      document: this.uploadFile
+      file: this.uploadFile
     });
     // logic to upload file
+    this.fileUploadService
+      .uploadFile(formData)
+      .subscribe(r => {
+        console.log(r)
+        this.isUploading = false;
+      });
   }
 }

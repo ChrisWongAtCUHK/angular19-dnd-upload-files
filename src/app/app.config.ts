@@ -3,6 +3,7 @@ import { provideRouter } from '@angular/router';
 import { provideHotToastConfig } from '@ngxpert/hot-toast';
 
 import { routes } from './app.routes';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,6 +12,7 @@ export const appConfig: ApplicationConfig = {
     provideHotToastConfig({
       dismissible: true,
       duration: 5000,
-    })
+    }),
+    provideHttpClient()
   ]
 };
