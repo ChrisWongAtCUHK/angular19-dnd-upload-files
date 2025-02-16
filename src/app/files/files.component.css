@@ -65,10 +65,10 @@ input {
 button.delete {
   position: absolute;
   left: 210px;
-  top: 5px;
+  top: 4px;
   background-color: white;
   color:  #525252;
-  font-size: 1.1rem;
+  font-size: 0.6rem;
   margin: 0;
   padding: 1px 10px 3px 10px;
 }
