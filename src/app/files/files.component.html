@@ -1,8 +1,8 @@
 <ul class="files">
   <li *ngFor="let file of files">
-    <a href="{{file}}">
-      {{file.split('/').pop()}}
+    <a href="{{file.url}}">
+      {{file.name}}
     </a>
-    <button type="button" class="delete" title="delete customer" (click)="delete(file)">x</button>
+    <button type="button" class="delete" title="delete customer" (click)="delete(file.url)">x</button>
   </li>
 </ul>

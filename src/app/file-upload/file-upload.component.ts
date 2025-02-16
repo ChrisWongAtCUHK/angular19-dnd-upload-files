@@ -4,6 +4,7 @@ import { HotToastService } from '@ngxpert/hot-toast';
 import { serialize } from 'object-to-formdata';
 import { FileUploadService } from '../file-upload.service';
 import { FilesComponent } from '../files/files.component';
+import { DBFile } from '../dbfile';
 
 const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
 
@@ -14,7 +15,7 @@ const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/svg+xml'];
   styleUrl: './file-upload.component.css',
 })
 export class FileUploadComponent {
-  files: string[] = [];
+  files: DBFile[] = [];
   constructor(private fileUploadService: FileUploadService) {}
 
   @ViewChild('fileInput', { static: false }) fileInput!: ElementRef;
@@ -57,7 +58,7 @@ export class FileUploadComponent {
     this.isUploading = true;
 
     const formData = serialize({
-      file: this.uploadFile
+      image: this.uploadFile
     });
     // logic to upload file
     this.fileUploadService
