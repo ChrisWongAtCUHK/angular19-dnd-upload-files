@@ -57,3 +57,12 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+# [Angular Drag and Drop Files Upload Made Simple](https://dev.to/tabernerojerry/angular-drag-and-drop-files-upload-made-simple-jb6)
+## Setting Up Angular Project
+```
+npx -p @angular/cli ng new angular19-dnd-upload-files
+```
+```
+npm install -D tailwindcss@3 postcss autoprefixer
+```
