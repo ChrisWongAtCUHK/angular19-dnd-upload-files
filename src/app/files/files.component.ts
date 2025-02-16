@@ -19,6 +19,8 @@ export class FilesComponent {
   getFiles(): void {
     this.fileUploadService
       .getFiles()
-      .subscribe((files) => (this.files = files));
+      .subscribe((files) => {
+        this.files = files;
+      });
   }
 }

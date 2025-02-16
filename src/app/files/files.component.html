@@ -1,7 +1,7 @@
 <ul class="files">
   <li *ngFor="let file of files">
     <a href="{{file}}">
-      <span class="badge">{{file}}</span> {{file}}
+      {{file.split('/').pop()}}
     </a>
   </li>
 </ul>
