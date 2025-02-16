@@ -3,3 +3,14 @@
     display: block;
   }
 }
+
+.outline-dashed {
+  height: auto;
+}
+span.mb-6 {
+  margin-bottom: 0;
+}
+
+.justify-center > button {
+  margin-top: 6px;
+}
